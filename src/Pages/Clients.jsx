@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import ClientTable from "../Components/ClientTable";
+import ClientTable from "../components/ClientTable";
 import ClientModal from "../components/Modals/ClientModal";
 import Message from "../components/Alerts/Message";
 import axios from "axios";

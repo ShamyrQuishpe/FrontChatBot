@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from "react";
-import ProductTable from "../Components/ProductTable";
+import ProductTable from "../components/ProductTable";
 import ProductModal from "../components/Modals/ProductModal";
 import Message from "../components/Alerts/Message";
 import axios from "axios";

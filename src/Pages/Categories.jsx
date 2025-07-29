@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import CategoryTable from "../Components/CategoryTable";
+import CategoryTable from "../components/CategoryTable";
 import CategoryModal from "../components/Modals/CategoryModal";
 import Message from "../components/Alerts/Message";
 import axios from "axios";
