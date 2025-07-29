@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import TradeinTable from "../Components/TradeinTable";
+import TradeinTable from "../components/TradeinTable";
 import TradeinModal from "../components/Modals/TradeinModal";
 import Message from "../components/Alerts/Message";
 import axios from "axios";
