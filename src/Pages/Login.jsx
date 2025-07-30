@@ -13,6 +13,7 @@ export const Login = () => {
     email: '',
     password: ''
   });
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     let timer;
@@ -113,19 +114,42 @@ export const Login = () => {
             <label htmlFor="password" className="block text-sm font-medium text-[#333446] mb-1">
               Contraseña
             </label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              className="w-full px-4 py-2 border border-[#B8CFCE] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7F8CAA] bg-[#EAEFEF] text-[#333446] placeholder-[#7F8CAA]"
-              value={form.password}
-              onChange={handleChange}
-              placeholder="••••••••"
-              autoComplete="current-password"
-              required
-              aria-label="Contraseña"
-              disabled={isLoading}
-            />
+            <div className="relative">
+              <input
+                id="password"
+                name="password"
+                type={showPassword ? "text" : "password"}
+                className="w-full px-4 py-2 border border-[#B8CFCE] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7F8CAA] bg-[#EAEFEF] text-[#333446] placeholder-[#7F8CAA]"
+                value={form.password}
+                onChange={handleChange}
+                placeholder="••••••••"
+                autoComplete="current-password"
+                required
+                aria-label="Contraseña"
+                disabled={isLoading}
+              />
+              <button
+                type="button"
+                tabIndex={-1}
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-[#7F8CAA] focus:outline-none"
+                onClick={() => setShowPassword((prev) => !prev)}
+                aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+              >
+                {showPassword ? (
+                  // Ojito cerrado (eye-off)
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.94 17.94A10.05 10.05 0 0112 19c-5.523 0-10-4.477-10-10a9.96 9.96 0 012.122-6.13m1.664-1.664A9.96 9.96 0 0112 3c5.523 0 10 4.477 10 10a9.96 9.96 0 01-1.664 5.13m-1.664 1.664L4.222 4.222" />
+                    <line x1="3" y1="3" x2="21" y2="21" stroke="#7F8CAA" strokeWidth="2" />
+                  </svg>
+                ) : (
+                  // Ojito abierto (eye)
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
+                    <circle cx="12" cy="12" r="3" stroke="#7F8CAA" strokeWidth="2" />
+                  </svg>
+                )}
+              </button>
+            </div>
           </div>
           <button
             type="submit"

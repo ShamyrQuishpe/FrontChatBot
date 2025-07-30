@@ -92,9 +92,20 @@ const ProductModal = ({ open, onClose, onSubmit, initialData, categorias: catego
     const file = e.target.files[0];
     setImagen(file);
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => setPreview(reader.result);
-      reader.readAsDataURL(file);
+      const allowedTypes = [
+        'image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/bmp',
+        'image/heif', 'image/heic', 'image/x-heif', 'image/x-heic'
+      ];
+      // Algunos navegadores pueden no reconocer heif/heic, así que validamos por extensión también
+      const ext = file.name.split('.').pop().toLowerCase();
+      if (allowedTypes.includes(file.type) || ['heif', 'heic'].includes(ext)) {
+        const reader = new FileReader();
+        reader.onloadend = () => setPreview(reader.result);
+        reader.readAsDataURL(file);
+      } else {
+        setPreview(null);
+        setMensaje({ respuesta: "Formato de imagen no soportado para previsualización.", tipo: false });
+      }
     } else {
       setPreview(null);
     }
@@ -177,7 +188,7 @@ const ProductModal = ({ open, onClose, onSubmit, initialData, categorias: catego
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50">
-      <div className="bg-white p-4 sm:p-6 rounded-lg shadow-lg w-full max-w-md">
+      <div className="bg-white p-4 sm:p-6 rounded-lg shadow-lg w-full max-w-md max-h-[95vh] overflow-y-auto flex flex-col" style={{maxHeight: '95vh'}}>
         <h2 className="text-xl font-bold mb-4 text-[#102E50]">{initialData ? "Editar" : "Agregar"} Producto</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -214,9 +225,8 @@ const ProductModal = ({ open, onClose, onSubmit, initialData, categorias: catego
                 className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#7F8CAA]" required 
                 >
                 <option value="">Selecciona el tipo</option>
-                <option value="Openbox">Openbox</option>
+                <option value="Openbox">Open Box</option>
                 <option value="Nuevo">Nuevo</option>
-                <option value="Semi-nuevo">Semi-nuevo</option>
               </select>
             </div>
           </div>

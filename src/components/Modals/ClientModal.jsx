@@ -54,6 +54,8 @@ const ClientModal = ({ open, onClose, onSubmit, initialData }) => {
   const [passwordNuevo, setPasswordNuevo] = useState("");
   const [repetirPassword, setRepetirPassword] = useState("");
   const [showPasswordFields, setShowPasswordFields] = useState(false);
+  const [showPasswordNuevo, setShowPasswordNuevo] = useState(false);
+  const [showRepetirPassword, setShowRepetirPassword] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -180,11 +182,69 @@ const ClientModal = ({ open, onClose, onSubmit, initialData }) => {
                 <form onSubmit={handlePasswordUpdate} className="space-y-2 mt-2">
                   <div>
                     <label className="block text-sm font-medium mb-1">Nueva contraseña</label>
-                    <input type="password" value={passwordNuevo} onChange={e => setPasswordNuevo(e.target.value)} className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#7F8CAA]" required />
+                    <div className="relative">
+                      <input
+                        type={showPasswordNuevo ? "text" : "password"}
+                        value={passwordNuevo}
+                        onChange={e => setPasswordNuevo(e.target.value)}
+                        className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#7F8CAA]"
+                        required
+                      />
+                      <button
+                        type="button"
+                        tabIndex={-1}
+                        className="absolute right-2 top-1/2 transform -translate-y-1/2 text-[#7F8CAA] focus:outline-none"
+                        onClick={() => setShowPasswordNuevo(prev => !prev)}
+                        aria-label={showPasswordNuevo ? "Ocultar contraseña" : "Mostrar contraseña"}
+                      >
+                        {showPasswordNuevo ? (
+                          // Ojito cerrado (eye-off)
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.94 17.94A10.05 10.05 0 0112 19c-5.523 0-10-4.477-10-10a9.96 9.96 0 012.122-6.13m1.664-1.664A9.96 9.96 0 0112 3c5.523 0 10 4.477 10 10a9.96 9.96 0 01-1.664 5.13m-1.664 1.664L4.222 4.222" />
+                            <line x1="3" y1="3" x2="21" y2="21" stroke="#7F8CAA" strokeWidth="2" />
+                          </svg>
+                        ) : (
+                          // Ojito abierto (eye)
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
+                            <circle cx="12" cy="12" r="3" stroke="#7F8CAA" strokeWidth="2" />
+                          </svg>
+                        )}
+                      </button>
+                    </div>
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-1">Repetir contraseña</label>
-                    <input type="password" value={repetirPassword} onChange={e => setRepetirPassword(e.target.value)} className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#7F8CAA]" required />
+                    <div className="relative">
+                      <input
+                        type={showRepetirPassword ? "text" : "password"}
+                        value={repetirPassword}
+                        onChange={e => setRepetirPassword(e.target.value)}
+                        className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#7F8CAA]"
+                        required
+                      />
+                      <button
+                        type="button"
+                        tabIndex={-1}
+                        className="absolute right-2 top-1/2 transform -translate-y-1/2 text-[#7F8CAA] focus:outline-none"
+                        onClick={() => setShowRepetirPassword(prev => !prev)}
+                        aria-label={showRepetirPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+                      >
+                        {showRepetirPassword ? (
+                          // Ojito cerrado (eye-off)
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.94 17.94A10.05 10.05 0 0112 19c-5.523 0-10-4.477-10-10a9.96 9.96 0 012.122-6.13m1.664-1.664A9.96 9.96 0 0112 3c5.523 0 10 4.477 10 10a9.96 9.96 0 01-1.664 5.13m-1.664 1.664L4.222 4.222" />
+                            <line x1="3" y1="3" x2="21" y2="21" stroke="#7F8CAA" strokeWidth="2" />
+                          </svg>
+                        ) : (
+                          // Ojito abierto (eye)
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
+                            <circle cx="12" cy="12" r="3" stroke="#7F8CAA" strokeWidth="2" />
+                          </svg>
+                        )}
+                      </button>
+                    </div>
                   </div>
                   <button type="submit" className="bg-[#7F8CAA] hover:bg-[#333446] text-white px-4 py-2 rounded">Actualizar contraseña</button>
                 </form>
